@@ -13,7 +13,7 @@ const loader = (ele) => {
   timeInterval = setInterval(() => {
     ele.textContent += ".";
 
-    if (ele.textContent === ".....") {
+    if (ele.textContent === "......") {
       ele.textContent = "";
     }
   }, 500);
@@ -33,7 +33,7 @@ const answeredText = (ele, text) => {
 };
 
 const generateID = () => {
-  const timestamp = new Date.now();
+  const timestamp = Date.now();
   const randomNumber = Math.random();
   const hexaString = randomNumber.toString(16);
 
@@ -77,10 +77,28 @@ const submitHandler = async (event) => {
     },
     body: JSON.stringify({ prompt: data.get('prompt') })
   })
+
+
+  clearInterval(timeInterval)
+  messageM.innerHTML = ""
+
+
+  if (response.ok) {
+    const data = await response.json()
+    const parsedData = data.Bot.trim()
+    console.log(parsedData);
+
+    answeredText(messageM, parsedData)
+  } else {
+    const err = await response.text()
+    messageM.innerHTML = "Something went wrong..."
+    alert(err)
+  }
 }
 
 form.addEventListener('submit', submitHandler)
 form.addEventListener('keyup', (e) => {
+  e.preventDefault()
   if (e.keyCode === 13) {
     submitHandler(e)
   }
