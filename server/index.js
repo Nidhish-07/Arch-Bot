@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 dotenv.config();
 import { Configuration, OpenAIApi } from "openai";
 
@@ -27,19 +27,18 @@ app.post("/", async (req, res) => {
         const prompt = req.body.prompt;
 
         const response = await openai.createCompletion({
-            prompt: `${prompt}`,
-            model: "text-davinci-003",
-            temperature: 10,
-            max_tokens: 2500,
+            prompt: `${prompt}`, model: "text-davinci-002",
+            temperature: 0.9,
+            max_tokens: 150,
             top_p: 1,
-            frequency_penalty: 0.5,
-            presence_penalty: 0,
+            frequency_penalty: 0,
+            presence_penalty: 0.6,
         });
 
-        res.status(200).send({ botData: response.data.choices[0].text })
+        res.status(200).send({ bot: response.data.choices[0].text })
     } catch (error) {
 
-        // console.log(error);
+        console.log(error);
         res.status(500).send(error)
     }
 });

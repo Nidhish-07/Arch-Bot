@@ -85,7 +85,7 @@ const submitHandler = async (event) => {
 
   if (response.ok) {
     const data = await response.json()
-    const parsedData = data.Bot.trim()
+    const parsedData = data.bot.trim()
     console.log(parsedData);
 
     answeredText(messageM, parsedData)

@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap");
-
 * {
   margin: 0;
   padding: 0;
@@ -11,37 +9,10 @@
   font-family: "Alegreya Sans", sans-serif;
 }
 
-body {
-  background: #343541;
-}
-
-#app {
-  width: 100vw;
-  height: 100vh;
-  background: #343541;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
 #chat-text {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-
-  display: flex;
-  flex-direction: column;
-  
-  gap: 10px;
-
   -ms-overflow-style: none;
   scrollbar-width: none;
-
-  padding-bottom: 20px;
-  scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 /* hides scrollbar */
@@ -55,13 +26,16 @@ body {
 }
 
 .ai {
-  background: #40414F;
+  background: #57adf8;
+  color: coral;
+  border-radius: 4px;
 }
 
 .chat {
-  width: 100%;
-  max-width: 1280px;
+  /* width: 100%; */
+  /* max-width: 1280px; */
   margin: 0 auto;
+  /* background-color: #fff; */
 
   display: flex;
   flex-direction: row;
@@ -72,10 +46,11 @@ body {
 .profile {
   width: 36px;
   height: 36px;
-  border-radius: 5px;
+  border-radius: 50%;
 
-  background: #5436DA;
+  background: #5436da;
 
+  margin: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,13 +69,13 @@ body {
 .message {
   flex: 1;
 
-  color: #dcdcdc;
+  color: rgb(242, 222, 215);
   font-size: 20px;
 
   max-width: 100%;
   overflow-x: scroll;
 
-  white-space: pre-wrap; 
+  white-space: pre-wrap;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -109,41 +84,4 @@ body {
 /* hides scrollbar */
 .message::-webkit-scrollbar {
   display: none;
-}
-
-form {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 10px;
-  background: #40414F;
-
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-
-textarea {
-  width: 100%;
-
-  color: #fff;
-  font-size: 18px;
-
-  padding: 10px;
-  background: transparent;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-}
-
-button {
-  outline: 0;
-  border: 0;
-  cursor: pointer;
-  background: transparent;
-}
-
-form img {
-  width: 30px;
-  height: 30px;
 }
