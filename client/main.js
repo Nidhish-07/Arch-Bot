@@ -71,9 +71,10 @@ const submitHandler = async (event) => {
 
   loader(messageM)
 
-  const response = await fetch("https://arch-bot.onrender.com", {
+  const response = await fetch("https://arch-bot.onrender.com/", {
     method: 'POST', headers: {
-      'Content-type': 'application/json'
+      'Content-type': 'application/json',
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
     },
     body: JSON.stringify({ prompt: data.get('prompt') })
   })
