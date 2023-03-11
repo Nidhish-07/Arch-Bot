@@ -12,6 +12,7 @@ app.use(cors());
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
+    organization: "org-MyiOfJnLrKdoCDW0K0ZcKegD",
 });
 
 const openai = new OpenAIApi(configuration);
