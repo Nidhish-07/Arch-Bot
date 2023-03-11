@@ -1,6 +1,7 @@
 import Bot from "/icons/botL.png";
 import User from "/icons/userL.png";
 import "./style.css";
+import axios from "axios";
 
 const form = document.querySelector("form");
 const chatText = document.querySelector("#chat-text");
@@ -53,53 +54,77 @@ const chat = (isAI, val, uniqueID) => {
   `;
 };
 
-
 const submitHandler = async (event) => {
   event.preventDefault();
 
-  const data = new FormData(form)
+  const data = new FormData(form);
 
-  chatText.innerHTML += chat(false, data.get('prompt'))
-  form.reset()
+  chatText.innerHTML += chat(false, data.get("prompt"));
+  form.reset();
 
-  const uniqueID = generateID()
-  chatText.innerHTML += chat(true, "", uniqueID)
+  const uniqueID = generateID();
+  chatText.innerHTML += chat(true, "", uniqueID);
 
-  chatText.scrollTop = chatText.scrollHeight
+  chatText.scrollTop = chatText.scrollHeight;
 
-  const messageM = document.getElementById(uniqueID)
+  const messageM = document.getElementById(uniqueID);
 
-  loader(messageM)
+  loader(messageM);
 
-  const response = await fetch("http://localhost:8080", {
-    method: 'POST', headers: {
-      'Content-type': 'application/json',
+  const response = await fetch("https://arch-bot.onrender.com/", {
+    // const response = await fetch("http://localhost:8080", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer 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`,
+      Accept: "application/json",
     },
-    body: JSON.stringify({ prompt: data.get('prompt') })
-  })
+    body: JSON.stringify({ prompt: data.get("prompt") }),
+  });
+  // await axios
+  //   .post(
+  //     // "https://arch-bot.onrender.com",
+  //     "http://localhost:8080",
+  //     JSON.stringify({ prompt: data.get("prompt") }),
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   )
+  //   .then(async (res) => {
+  //     const data = await response.json();
+  //     const parsedData = data.bot.trim();
+  //     console.log(parsedData);
+  //     answeredText(messageM, parsedData);
+  //   })
+  //   .catch(async (error) => {
+  //     const err = await response.text();
+  //     messageM.innerHTML = "Something went wrong...";
+  //     alert(err);
+  //   });
 
-
-  clearInterval(timeInterval)
-  messageM.innerHTML = ""
-
+  clearInterval(timeInterval);
+  messageM.innerHTML = "";
 
   if (response.ok) {
-    const data = await response.json()
-    const parsedData = data.bot.trim()
+    const data = await response.json();
+    const parsedData = data.bot.trim();
     console.log(parsedData);
 
-    answeredText(messageM, parsedData)
+    answeredText(messageM, parsedData);
   } else {
-    const err = await response.text()
-    messageM.innerHTML = "Something went wrong..."
-    alert(err)
+    const err = await response.text();
+    messageM.innerHTML = "Something went wrong...";
+    alert(err);
+    console.log(err);
   }
-}
+};
 
-form.addEventListener('submit', submitHandler)
-form.addEventListener('keyup', (e) => {
-  e.preventDefault()
+form.addEventListener("submit", submitHandler);
+form.addEventListener("keyup", (e) => {
+  e.preventDefault();
   if (e.keyCode === 13) {
-    submitHandler(e)
+    submitHandler(e);
   }
-})
+});
