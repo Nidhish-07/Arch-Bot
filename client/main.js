@@ -71,7 +71,7 @@ const submitHandler = async (event) => {
 
   loader(messageM);
 
-  const response = await fetch("https://arch-bot.onrender.com", {
+  const response = await fetch("https://arch-bot.onrender.com/", {
     // const response = await fetch("http://localhost:8080", {
     method: "POST",
     headers: {
